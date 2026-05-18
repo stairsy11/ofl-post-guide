@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="OFL Posts">
+    <title>obsessed for life · Post Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral:        #D4614A;
+            --coral-deep:   #B84F3A;
+            --coral-pale:   #FAF0EE;
+            --gold:         #D4A853;
+            --ink:          #231808;
+            --ink-soft:     #4A3820;
+            --ink-faint:    #7A6245;
+            --cream:        #FFFDF9;
+            --mist:         #F8F3F0;
+            --border:       rgba(212,97,74,0.2);
+            --border-light: rgba(212,97,74,0.1);
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+        html, body { height:100%; }
+
+        body {
+            font-family: 'Jost', sans-serif;
+            background: var(--cream);
+            color: var(--ink);
+            padding-bottom: 60px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Banner ── */
+        #new-week-banner {
+            display: none;
+            background: var(--coral);
+            padding: 11px 20px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 500;
+            color: #fff;
+            letter-spacing: 0.08em;
+        }
+
+        /* ── Header — dark ink, unchanged ── */
+        .header {
+            background: var(--ink);
+            padding: 52px 24px 36px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 120%, rgba(212,168,83,0.12) 0%, transparent 65%);
+        }
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212,168,83,0.35), transparent);
+        }
+        .brand-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-weight: 300;
+            font-size: 13px;
+            letter-spacing: 0.28em;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        .header-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            font-size: 30px;
+            color: var(--cream);
+            line-height: 1.15;
+            position: relative;
+        }
+        .header-rule {
+            width: 32px; height: 1px;
+            background: rgba(212,168,83,0.4);
+            margin: 14px auto 0;
+        }
+
+        /* ── Sections ── */
+        .section { padding: 0 18px; margin-top: 26px; }
+        .section-label {
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--coral);
+            margin-bottom: 11px;
+        }
+
+        /* ── Week Card — coral ── */
+        .week-card {
+            background: var(--coral);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+        .week-card-top-rule {
+            height: 2px;
+            background: linear-gradient(90deg, transparent 5%, rgba(255,255,255,0.38) 40%, transparent 95%);
+        }
+        .week-card-inner {
+            padding: 18px 18px 0;
+            position: relative;
+        }
+        .week-ghost-num {
+            position: absolute;
+            top: 6px; right: 14px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 80px;
+            font-weight: 300;
+            color: rgba(255,255,255,0.12);
+            line-height: 1;
+            pointer-events: none;
+            user-select: none;
+        }
+        .week-dates-label {
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.52);
+            margin-bottom: 8px;
+        }
+        .week-focus-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-weight: 400;
+            font-size: 27px;
+            color: #fff;
+            line-height: 1.2;
+            padding-right: 48px;
+        }
+        .week-reel-row {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            margin-top: 14px;
+        }
+        .tag {
+            font-size: 8px;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: #fff;
+            background: rgba(255,255,255,0.2);
+            padding: 3px 9px;
+            border-radius: 3px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+        .reel-text {
+            font-size: 13px;
+            font-weight: 300;
+            color: rgba(255,255,255,0.8);
+            line-height: 1.5;
+        }
+        .post-pill {
+            margin: 14px 18px 0;
+            background: #FFFDF9;
+            border-radius: 9px;
+            padding: 13px 16px;
+            text-align: center;
+        }
+        .post-pill-label {
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--coral-deep);
+            margin-bottom: 5px;
+        }
+        .post-pill-day { font-size: 15px; font-weight: 500; color: var(--ink); }
+        .post-pill-backup { font-size: 11px; color: var(--ink-faint); margin-top: 4px; }
+
+        .joy-section {
+            background: rgba(0,0,0,0.1);
+            border-top: 1px solid rgba(255,255,255,0.14);
+            margin-top: 16px;
+            padding: 16px 18px 18px;
+        }
+        .joy-section-label {
+            font-size: 8px;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.42);
+            margin-bottom: 13px;
+        }
+        .joy-row { display: flex; gap: 11px; align-items: flex-start; margin-bottom: 10px; }
+        .joy-row:last-child { margin-bottom: 0; }
+        .joy-badge {
+            width: 22px; height: 22px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.35);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 10px; font-weight: 500;
+            color: rgba(255,255,255,0.88);
+            flex-shrink: 0;
+        }
+        .joy-text { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.8); line-height: 1.5; }
+
+        /* ── Caption Accordion ── */
+        .accordion {
+            background: var(--mist);
+            border: 1px solid var(--border);
+            border-radius: 11px;
+            overflow: hidden;
+        }
+        .accordion-btn {
+            width: 100%;
+            padding: 14px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: 'Jost', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--ink-soft);
+            text-align: left;
+        }
+        .accordion-chevron {
+            font-size: 9px;
+            color: var(--coral);
+            transition: transform 0.25s ease;
+            flex-shrink: 0;
+            margin-left: 10px;
+        }
+        .accordion-chevron.open { transform: rotate(180deg); }
+        .accordion-body { display: none; padding: 0 16px 16px; flex-direction: column; }
+        .accordion-body.open { display: flex; }
+
+        .caption-item { padding: 13px 0; border-top: 1px solid var(--border-light); }
+        .caption-item:first-child { border-top: none; padding-top: 2px; }
+        .caption-part-label {
+            font-size: 8px; font-weight: 600;
+            letter-spacing: 0.18em; text-transform: uppercase;
+            color: var(--coral); margin-bottom: 4px;
+        }
+        .caption-direction { font-size: 10px; color: var(--ink-faint); margin-bottom: 6px; }
+        .caption-copy {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic; font-size: 16px;
+            color: var(--ink); line-height: 1.55;
+        }
+
+        /* ── Progress ── */
+        .progress-row {
+            display: flex; align-items: center; gap: 12px;
+            padding: 11px 14px;
+            background: var(--coral-pale);
+            border-radius: 9px;
+            margin-bottom: 14px;
+        }
+        .progress-track {
+            flex: 1; height: 3px;
+            background: rgba(212,97,74,0.2);
+            border-radius: 2px; overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%; background: var(--coral);
+            border-radius: 2px; width: 0%;
+            transition: width 0.35s cubic-bezier(0.34,1.56,0.64,1);
+        }
+        .progress-count {
+            font-size: 11px; font-weight: 600;
+            color: var(--coral);
+            white-space: nowrap; min-width: 44px; text-align: right;
+        }
+
+        /* ── Checklist ── */
+        .checklist { display: flex; flex-direction: column; gap: 3px; }
+        .check-item {
+            border-radius: 9px;
+            background: var(--cream);
+            border: 1px solid transparent;
+            overflow: hidden;
+            transition: border-color 0.15s, background 0.15s;
+        }
+        .check-item.checked { border-color: var(--border); background: rgba(212,97,74,0.05); }
+        .check-row {
+            display: flex; align-items: flex-start;
+            gap: 13px; padding: 13px 14px 0 14px;
+            cursor: pointer; user-select: none;
+        }
+        .check-row-bottom { padding: 0 14px 13px 47px; }
+        .check-circle {
+            width: 21px; height: 21px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(212,97,74,0.48);
+            flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            margin-top: 1px;
+            transition: background 0.2s, border-color 0.2s;
+        }
+        .check-item.checked .check-circle { background: var(--coral); border-color: var(--coral); }
+        .checkmark {
+            display: none;
+            width: 8px; height: 5px;
+            border-left: 1.5px solid #fff;
+            border-bottom: 1.5px solid #fff;
+            transform: rotate(-45deg) translateY(-1px);
+        }
+        .check-item.checked .checkmark { display: block; }
+        .check-text { flex: 1; padding-top: 1px; }
+        .check-name {
+            font-size: 13px; font-weight: 500;
+            color: var(--ink); margin-bottom: 2px;
+            transition: color 0.2s;
+        }
+        .check-item.checked .check-name {
+            color: var(--coral);
+            text-decoration: line-through;
+            text-decoration-color: rgba(212,97,74,0.35);
+        }
+        .check-desc {
+            font-size: 12px; font-weight: 300;
+            color: var(--ink-faint); line-height: 1.45;
+            margin-bottom: 6px;
+        }
+        .guidance-toggle {
+            display: inline-flex; align-items: center; gap: 4px;
+            cursor: pointer; padding: 2px 0 6px;
+        }
+        .guidance-toggle-label { font-size: 10px; font-weight: 500; color: var(--coral); }
+        .guidance-arrow { font-size: 8px; color: var(--coral); transition: transform 0.2s ease; }
+        .guidance-arrow.open { transform: rotate(180deg); }
+        .guidance-panel {
+            display: none; flex-direction: column; gap: 10px;
+            margin-top: 4px; padding: 13px 14px;
+            background: var(--coral-pale);
+            border-radius: 8px;
+        }
+        .guidance-panel.open { display: flex; }
+        .guidance-row { display: flex; flex-direction: column; gap: 3px; }
+        .guidance-row-label {
+            font-size: 8px; font-weight: 600;
+            letter-spacing: 0.16em; text-transform: uppercase;
+            color: var(--coral-deep);
+        }
+        .guidance-row-text {
+            font-size: 12px; font-weight: 300;
+            color: var(--ink-soft); line-height: 1.55;
+        }
+
+        .reset-btn {
+            width: 100%; margin-top: 10px; padding: 13px;
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: 'Jost', sans-serif;
+            font-size: 11px; font-weight: 400;
+            letter-spacing: 0.06em;
+            color: var(--ink-faint);
+            cursor: pointer;
+        }
+        .reset-btn:active { border-color: var(--coral); color: var(--coral); }
+
+        /* ── Notes ── */
+        .notes-area {
+            width: 100%;
+            border: 1px solid var(--border);
+            border-radius: 11px;
+            padding: 14px 16px;
+            font-family: 'Jost', sans-serif;
+            font-size: 13px; font-weight: 300;
+            color: var(--ink);
+            background: var(--cream);
+            resize: none; min-height: 110px;
+            line-height: 1.65; outline: none;
+            -webkit-appearance: none;
+            transition: border-color 0.2s;
+        }
+        .notes-area:focus { border-color: rgba(212,97,74,0.45); }
+        .notes-area::placeholder { color: rgba(74,56,32,0.3); }
+
+        .divider { height: 1px; background: var(--border-light); margin: 28px 18px 0; }
+
+        .out-of-range {
+            background: var(--mist); border: 1px solid var(--border);
+            border-radius: 12px; padding: 24px 20px; text-align: center;
+        }
+        .out-of-range p {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic; font-size: 19px;
+            color: var(--ink-soft); line-height: 1.5;
+        }
+        .out-of-range span {
+            display: block; font-size: 12px; font-weight: 300;
+            color: var(--ink-faint); margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="new-week-banner">&#10022; New week. Checklist refreshed.</div>
+
+<div class="header">
+    <span class="brand-name">obsessed for life</span>
+    <h1 class="header-title">Weekly Post Guide</h1>
+    <div class="header-rule"></div>
+</div>
+
+<div class="section">
+    <div class="section-label">This Week</div>
+    <div id="week-card-container"></div>
+</div>
+
+<div class="section" id="caption-section">
+    <div class="section-label">Caption Guide</div>
+    <div class="accordion">
+        <button class="accordion-btn" onclick="toggleCaption()">
+            <span>This week&#8217;s caption structure</span>
+            <span class="accordion-chevron" id="caption-chevron">&#9660;</span>
+        </button>
+        <div class="accordion-body" id="caption-body"></div>
+    </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section" style="margin-top:24px;">
+    <div class="section-label">Weekly Checklist</div>
+    <div class="progress-row">
+        <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+        <span class="progress-count" id="progress-count">0 of 10</span>
+    </div>
+    <div class="checklist" id="checklist"></div>
+    <button class="reset-btn" onclick="resetChecklist()">Reset checklist</button>
+</div>
+
+<div class="divider"></div>
+
+<div class="section" style="margin-top:24px;">
+    <div class="section-label">Notes &amp; Signals</div>
+    <textarea class="notes-area" id="notes-area" placeholder="Saves, replies, DMs, link taps, comments &#8212; and what felt energizing this week." rows="5"></textarea>
+</div>
+
+<script>
+function defaultCaption(focus) {
+    return [
+        { part:"Opening",      dir:"Name the moment",    text:"\u201C"+focus+".\u201D" },
+        { part:"Founder line", dir:"Add your voice",     text:"Add one Theresa line with warmth, wit, or personal observation." },
+        { part:"Prompt",       dir:"Invite reflection",  text:"Use the reflection question from your JOY Story directions above." },
+        { part:"Bridge",       dir:"Connect to the Map", text:"\u201CThe Obsession Map gives those clues a beautiful place to land.\u201D" },
+        { part:"Invitation",   dir:"Close with warmth",  text:"\u201CIf you\u2019re ready, accept this invitation and begin your Map.\u201D" },
+    ];
+}
+
+const WEEKS = [
+    { num:1, dates:"May 18 \u2013 May 24", postDay:"Wednesday, May 20 at 12 p.m.", backup:"Thursday, May 21 at 9 a.m.", focus:"Start with what feels alive", reel:"Reel 20 \u00B7 Start here", joy:{ j:"A short walk or new place", o:"One tiny beauty choice", y:"\u201CWhat feels alive for you right now?\u201D" }, caption:[ { part:"Opening", dir:"Name the moment", text:"\u201CStart with what feels alive.\u201D" }, { part:"Founder line", dir:"Add your voice", text:"\u201CI keep coming back to this because aliveness has a way of leaving tiny clues before it becomes a plan.\u201D" }, { part:"Prompt", dir:"Invite reflection", text:"\u201CWhat feels alive for you right now?\u201D" }, { part:"Bridge", dir:"Connect to the Map", text:"\u201CThe Obsession Map gives those clues a beautiful place to land.\u201D" }, { part:"Invitation", dir:"Close with warmth", text:"\u201CIf you\u2019re ready, accept this invitation and begin your Map.\u201D" } ] },
+    { num:2, dates:"May 25 \u2013 May 31", postDay:"Wednesday, May 27 at 12 p.m.", backup:"Thursday, May 28 at 9 a.m.", focus:"Joy leaves clues", reel:"Reel 8 \u00B7 The joy audit", joy:{ j:"A moment of curiosity", o:"One ordinary joy worth keeping", y:"\u201CWhat gave you energy lately?\u201D" }, caption:defaultCaption("Joy leaves clues") },
+    { num:3, dates:"June 1 \u2013 June 7", postDay:"Wednesday, June 3 at 12 p.m.", backup:"Thursday, June 4 at 9 a.m.", focus:"Taste is self-knowledge", reel:"Reel \u00B7 Taste is a clue", joy:{ j:"A place with color, design, food, or beauty", o:"One choice with more beauty than required", y:"\u201CWhat do you keep choosing?\u201D" }, caption:defaultCaption("Taste is self-knowledge") },
+    { num:4, dates:"June 8 \u2013 June 14", postDay:"Wednesday, June 10 at 12 p.m.", backup:"Thursday, June 11 at 9 a.m.", focus:"More can become clear", reel:"Reel \u00B7 The sentence I hear from women", joy:{ j:"A new idea or invitation", o:"One moment you want more of", y:"\u201CWhat does more mean to you right now?\u201D" }, caption:defaultCaption("More can become clear") },
+    { num:5, dates:"June 15 \u2013 June 21", postDay:"Wednesday, June 17 at 12 p.m.", backup:"Thursday, June 18 at 9 a.m.", focus:"Small choices build aliveness", reel:"Reel \u00B7 A little more obsessed with life today", joy:{ j:"A small brave yes", o:"Coffee, flowers, music, light, or a table moment", y:"\u201CWhat small yes feels available today?\u201D" }, caption:defaultCaption("Small choices build aliveness") },
+    { num:6, dates:"June 22 \u2013 June 28", postDay:"Wednesday, June 24 at 12 p.m.", backup:"Thursday, June 25 at 9 a.m.", focus:"Joy can offer direction", reel:"Reel \u00B7 What if joy is practical", joy:{ j:"A place or activity with momentum", o:"A joy moment with energy", y:"\u201CWhich joy gives you momentum?\u201D" }, caption:defaultCaption("Joy can offer direction") },
+    { num:7, dates:"June 29 \u2013 July 5", postDay:"Wednesday, July 1 at 12 p.m.", backup:"Thursday, July 2 at 9 a.m.", focus:"Desire can begin as a whisper", reel:"Reel \u00B7 What I noticed while creating the Map", joy:{ j:"A quiet moment of noticing", o:"One detail pulling your attention", y:"\u201CWhat keeps whispering for your attention?\u201D" }, caption:defaultCaption("Desire can begin as a whisper") },
+    { num:8, dates:"July 6 \u2013 July 12", postDay:"Wednesday, July 8 at 12 p.m.", backup:"Thursday, July 9 at 9 a.m.", focus:"Preference is powerful", reel:"Reel \u00B7 The tiny rebellion", joy:{ j:"Choose a different route, meal, shop, class, or idea", o:"One preference honored today", y:"\u201CWhat would you choose if you gave yourself permission?\u201D" }, caption:defaultCaption("Preference is powerful") },
+    { num:9, dates:"July 13 \u2013 July 19", postDay:"Wednesday, July 15 at 12 p.m.", backup:"Thursday, July 16 at 9 a.m.", focus:"The elegant yes", reel:"Reel \u00B7 The elegant yes", joy:{ j:"A yes moment in motion", o:"One beautiful detail you said yes to", y:"\u201CWhat feels like a yes before you can explain it?\u201D" }, caption:defaultCaption("The elegant yes") },
+    { num:10, dates:"July 20 \u2013 July 26", postDay:"Wednesday, July 22 at 12 p.m.", backup:"Thursday, July 23 at 9 a.m.", focus:"A question can change the room", reel:"Reel \u00B7 Why prompts work", joy:{ j:"Share a question from a walk or outing", o:"Notebook, coffee, or reflection card", y:"\u201CWhat feels like a yes in your body?\u201D" }, caption:defaultCaption("A question can change the room") },
+    { num:11, dates:"July 27 \u2013 August 2", postDay:"Wednesday, July 29 at 12 p.m.", backup:"Thursday, July 30 at 9 a.m.", focus:"Joy deserves better public relations", reel:"Reel 17 \u00B7 Founder confession", joy:{ j:"One place where joy feels grown up and useful", o:"One lighthearted everyday moment", y:"\u201CWhere is joy giving you information?\u201D" }, caption:defaultCaption("Joy deserves better public relations") },
+    { num:12, dates:"August 3 \u2013 August 9", postDay:"Wednesday, August 5 at 12 p.m.", backup:"Thursday, August 6 at 9 a.m.", focus:"Your Map starts here", reel:"Reel 12 \u00B7 The Map is ready", joy:{ j:"A path, doorway, or movement moment", o:"One ordinary spark from your day", y:"\u201CWhat are you ready to explore?\u201D" }, caption:defaultCaption("Your Map starts here") },
+];
+
+const CHECKLIST = [
+    { id:"review", name:"Review", desc:"Look at the scheduled feed posts for the week.", guidance:[ { label:"Where you could be", text:"At your desk with coffee, or scrolling on your phone from anywhere comfortable." }, { label:"What you\u2019re doing", text:"Scan the visual flow of your planned posts. Check for variety and notice if anything feels off or repetitive." }, { label:"The question to ask", text:"Does this week feel like me? Does it feel alive, or am I just filling space?" } ] },
+    { id:"choose", name:"Choose", desc:"Pick one post for a founder caption pass.", guidance:[ { label:"Where you could be", text:"Same sitting, before you film or write anything else." }, { label:"What you\u2019re doing", text:"Choosing the image or moment that gave you a real feeling, not just the one that looks prettiest. You want something with a real thought behind it." }, { label:"The question to ask", text:"Which one do I actually have something to say about?" } ] },
+    { id:"voice", name:"Add voice", desc:"Add one Theresa line with warmth, wit, or personal observation.", guidance:[ { label:"Where you could be", text:"Your phone notes, a notebook, the caption draft itself. Wherever you write naturally." }, { label:"What you\u2019re doing", text:"Writing one sentence that only you could write. A real observation from your week, connected to the post. It can be small." }, { label:"What to say", text:"Something true and a little unexpected. Think of it as a field note from your life, dropped into the caption to make a woman feel like she\u2019s with you." } ] },
+    { id:"film", name:"Film", desc:"Film one face-led Reel from the weekly prompt.", guidance:[ { label:"Where you could be", text:"Near a window with natural light. Your kitchen, living room, garden, or car. Anywhere that feels natural and isn\u2019t chaotic in the background." }, { label:"What you\u2019re doing", text:"Filming a short talking-head Reel from this week\u2019s focus theme. One take or a few. You\u2019re talking to one woman, not a crowd." }, { label:"How to start", text:"Open with this week\u2019s focus line. Keep it conversational. Start mid-thought, like you\u2019re continuing a conversation she already knows she\u2019s in." } ] },
+    { id:"shareJ", name:"Share J", desc:"Post one Journey Story from an outing, walk, idea, or small brave yes.", guidance:[ { label:"Where you could be", text:"Out on a walk, at a new place, running an errand, trying something for the first time. Anywhere that counts as movement or a yes." }, { label:"What you\u2019re doing", text:"Filming a quick clip or taking a photo of where you are. Adding a line of text on top. It doesn\u2019t need to be polished." }, { label:"What to say", text:"Something field-note-like. Try: \u201CA tiny field note from today: aliveness often starts in motion.\u201D Or name where you are and what pulled you there." } ] },
+    { id:"shareO", name:"Share O", desc:"Post one Ordinary Joy Story with beauty, taste, humor, or a daily detail.", guidance:[ { label:"Where you could be", text:"Your morning routine, a meal, your kitchen, a shop, a corner of your home. Anywhere you\u2019d normally scroll past." }, { label:"What you\u2019re doing", text:"Noticing one small beautiful or pleasing detail. Photographing it. The light, a drink, a flower, a table setting, something you chose." }, { label:"What to say", text:"Try: \u201CToday\u2019s ordinary joy: [the thing].\u201D Keep it simple. The beauty is in the noticing, not the explanation." } ] },
+    { id:"shareY", name:"Share Y", desc:"Post one Your Turn Story with a reflection question.", guidance:[ { label:"Where you could be", text:"This is the last slide in your Story sequence, after J and O. You can create it from anywhere." }, { label:"What you\u2019re doing", text:"Posting a plain text slide or a simple photo with a question overlaid. The question does the work. Your job is to make it easy to answer." }, { label:"What to say", text:"Use the Y reflection question from your JOY Story directions above. Post it as-is, or give it one small tweak if it feels more like you." } ] },
+    { id:"invite", name:"Invite", desc:"Add one Obsession Map invitation when the opening feels natural.", guidance:[ { label:"Where you could be", text:"In the caption, in a closing Story slide, or in a DM reply when the conversation opens a door." }, { label:"What you\u2019re doing", text:"Adding one warm sentence that connects what you shared to the Map. You\u2019re not pitching. You\u2019re pointing to something she might want." }, { label:"What to say", text:"Try: \u201CThe Obsession Map gives those clues a beautiful place to land.\u201D Or: \u201CIf you\u2019re ready, accept this invitation and begin your Map.\u201D" } ] },
+    { id:"connect", name:"Connect", desc:"Reply to comments, Story replies, and DMs for 15 to 20 minutes.", guidance:[ { label:"Where you could be", text:"On your phone, ideally the same day you post. A quiet 15 minutes is enough." }, { label:"What you\u2019re doing", text:"Reading replies slowly. Responding to the ones that feel like real conversation, where someone shared or asked something genuine." }, { label:"What to say", text:"Something that continues the thought, not just a thanks. If she said something resonated, ask what it brought up for her. That\u2019s where real connection starts." } ] },
+    { id:"notice", name:"Notice", desc:"Write down one signal from saves, replies, link taps, comments, or DMs.", guidance:[ { label:"Where you could be", text:"Right here in the Notes section below, or in your own notes app. Two minutes is enough." }, { label:"What you\u2019re doing", text:"Looking for the one thing that surprised you. A save count, a DM that went deeper than expected, a comment that felt like a real response." }, { label:"The question to ask", text:"What does this tell me about who\u2019s listening? That signal is often your next piece of content." } ] },
+];
+
+function getWeekNum() {
+    const start = new Date('2026-05-18T00:00:00');
+    const days = Math.floor((new Date() - start) / 86400000);
+    if (days < 0) return 0;
+    const w = Math.floor(days / 7) + 1;
+    return w > 12 ? 13 : w;
+}
+
+function loadState() {
+    try { const s = localStorage.getItem('ofl_guide'); return s ? JSON.parse(s) : null; } catch(e) { return null; }
+}
+function saveState() {
+    try { localStorage.setItem('ofl_guide', JSON.stringify(state)); } catch(e) {}
+}
+
+const currentWeek = getWeekNum();
+const raw = loadState();
+let newWeek = false;
+let state;
+
+if (!raw || raw.week !== currentWeek) {
+    newWeek = raw !== null;
+    state = { week: currentWeek, checks: {}, guidance: {}, notes: '' };
+    saveState();
+} else {
+    state = raw;
+    if (!state.guidance) state.guidance = {};
+}
+
+function renderWeekCard() {
+    const c = document.getElementById('week-card-container');
+    if (currentWeek === 0 || currentWeek > 12) {
+        c.innerHTML = '<div class="out-of-range"><p>The 12-week calendar runs<br>May 18 \u2013 August 9, 2026.</p><span>Check back when the plan begins.</span></div>';
+        document.getElementById('caption-section').style.display = 'none';
+        return;
+    }
+    const w = WEEKS[currentWeek - 1];
+    c.innerHTML = `<div class="week-card">
+        <div class="week-card-top-rule"></div>
+        <div class="week-card-inner">
+            <div class="week-ghost-num">${w.num}</div>
+            <div class="week-dates-label">${w.dates}</div>
+            <div class="week-focus-title">${w.focus}</div>
+            <div class="week-reel-row"><span class="tag">Reel</span><span class="reel-text">${w.reel}</span></div>
+        </div>
+        <div class="post-pill">
+            <div class="post-pill-label">Post</div>
+            <div class="post-pill-day">${w.postDay}</div>
+            <div class="post-pill-backup">Backup: ${w.backup}</div>
+        </div>
+        <div class="joy-section">
+            <div class="joy-section-label">JOY Story Directions</div>
+            ${['J','O','Y'].map((l,i)=>`<div class="joy-row"><div class="joy-badge">${l}</div><div class="joy-text">${[w.joy.j,w.joy.o,w.joy.y][i]}</div></div>`).join('')}
+        </div>
+    </div>`;
+}
+
+function renderCaption() {
+    if (currentWeek === 0 || currentWeek > 12) return;
+    const w = WEEKS[currentWeek - 1];
+    document.getElementById('caption-body').innerHTML = w.caption.map(c =>
+        `<div class="caption-item"><div class="caption-part-label">${c.part}</div><div class="caption-direction">${c.dir}</div><div class="caption-copy">${c.text}</div></div>`
+    ).join('');
+}
+
+function toggleCaption() {
+    document.getElementById('caption-body').classList.toggle('open');
+    document.getElementById('caption-chevron').classList.toggle('open');
+}
+
+function renderChecklist() {
+    document.getElementById('checklist').innerHTML = CHECKLIST.map(item => {
+        const checked = !!state.checks[item.id];
+        const gOpen = !!state.guidance[item.id];
+        const rows = item.guidance.map(g =>
+            `<div class="guidance-row"><div class="guidance-row-label">${g.label}</div><div class="guidance-row-text">${g.text}</div></div>`
+        ).join('');
+        return `<div class="check-item ${checked?'checked':''}" id="ci-${item.id}">
+            <div class="check-row" onclick="toggleCheck('${item.id}')">
+                <div class="check-circle"><div class="checkmark"></div></div>
+                <div class="check-text">
+                    <div class="check-name">${item.name}</div>
+                    <div class="check-desc">${item.desc}</div>
+                    <div class="guidance-toggle" onclick="event.stopPropagation();toggleGuidance('${item.id}')">
+                        <span class="guidance-toggle-label">Guidance</span>
+                        <span class="guidance-arrow ${gOpen?'open':''}">&#9660;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="check-row-bottom">
+                <div class="guidance-panel ${gOpen?'open':''}">${rows}</div>
+            </div>
+        </div>`;
+    }).join('');
+    const done = CHECKLIST.filter(i => state.checks[i.id]).length;
+    document.getElementById('progress-fill').style.width = (done/CHECKLIST.length*100)+'%';
+    document.getElementById('progress-count').textContent = done+' of '+CHECKLIST.length;
+}
+
+function toggleCheck(id) { state.checks[id]=!state.checks[id]; saveState(); renderChecklist(); }
+function toggleGuidance(id) { state.guidance[id]=!state.guidance[id]; saveState(); renderChecklist(); }
+function resetChecklist() { if(confirm('Reset all checkboxes?')){ state.checks={}; saveState(); renderChecklist(); } }
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('notes-area').addEventListener('input', function() { state.notes=this.value; saveState(); });
+});
+
+if (newWeek) {
+    const b = document.getElementById('new-week-banner');
+    b.style.display = 'block';
+    setTimeout(()=>{ b.style.transition='opacity 0.6s'; b.style.opacity='0'; setTimeout(()=>b.style.display='none',700); }, 3000);
+}
+
+renderWeekCard();
+renderCaption();
+renderChecklist();
+document.getElementById('notes-area').value = state.notes || '';
+</script>
+</body>
+</html>
